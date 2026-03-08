@@ -1,0 +1,1 @@
+java -jar simrs-khanza-aiv2.jar
