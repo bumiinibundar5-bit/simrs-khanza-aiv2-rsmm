@@ -1339,9 +1339,13 @@ public final class RMPemeriksaanEEG extends javax.swing.JDialog {
         String tglRekaman = Valid.SetTgl(TglRekaman.getSelectedItem() + "") + " " +
             TglRekaman.getSelectedItem().toString().substring(11, 19);
 
-        if (Sequel.menyimpantf("pemeriksaan_eeg",
+         if (Sequel.menyimpantf("pemeriksaan_eeg",
+    "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",
+    "No.Rawat", 44, new String[]{
+
+      /* if (Sequel.menyimpantf("pemeriksaan_eeg",
             "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",
-            "No.Rawat", 43, new String[]{
+            "No.Rawat", 43, new String[]{ */
                 TNoRw.getText(), tglRekaman,
                 KdDokterPemeriksa.getText(), KdOperator.getText(), TDiagnosa.getText(),
                 CmbKeadaanRekaman.getSelectedItem().toString(),
