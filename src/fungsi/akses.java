@@ -239,12 +239,12 @@ public final class akses {
             surat_pemesanan_dapur=false,pengajuan_barang_dapur=false,dapur_returbeli=false,hibah_dapur=false,ringkasan_penerimaan_dapur=false,ringkasan_pengajuan_dapur=false,
             ringkasan_pemesanan_dapur=false,ringkasan_returbeli_dapur=false,ringkasan_stokkeluar_dapur=false,dapur_stokkeluar_pertanggal=false,sirkulasi_dapur=false,
             sirkulasi_dapur2=false,verifikasi_penerimaan_dapur=false,nilai_penerimaan_vendor_dapur_perbulan=false,ringkasan_hutang_vendor_dapur=false,penilaian_psikologi_klinis=false,
-            penilaian_awal_medis_ranap_neonatus=false,penilaian_derajat_dehidrasi=false,penilaian_derajat_dehidrasi2=false,ringkasan_jasa_tindakan_medis=false,pendapatan_per_akun=false,hasil_pemeriksaan_echo=false,
+            penilaian_awal_medis_ranap_neonatus=false,penilaian_derajat_dehidrasi=false,ringkasan_jasa_tindakan_medis=false,pendapatan_per_akun=false,hasil_pemeriksaan_echo=false,
             penilaian_bayi_baru_lahir=false,rl1_3_ketersediaan_kamar=false,pendapatan_per_akun_closing=false,pengeluaran_pengeluaran=false,skrining_diabetes_melitus=false,
             laporan_tindakan=false,pelaksanaan_informasi_edukasi=false,layanan_kedokteran_fisik_rehabilitasi=false,skrining_kesehatan_gigi_mulut_balita=false,skrining_anemia=false,
             layanan_program_kfr=false,skrining_hipertensi=false,skrining_kesehatan_penglihatan=false,catatan_observasi_hemodialisa=false,skrining_kesehatan_gigi_mulut_dewasa=false,
             skrining_risiko_kanker_serviks=false,catatan_cairan_hemodialisa=false,skrining_kesehatan_gigi_mulut_lansia=false,skrining_indra_pendengaran=false,
-            catatan_pengkajian_paska_operasi=false,surat_pernyataan_kronologis=false,laporan_tindakan_paru=false,catatan_operasi_mata=false,hasil_pemeriksaan_spirometri=false,data_alergi_pasien=false;
+            catatan_pengkajian_paska_operasi=false,surat_pernyataan_kronologis=false,laporan_tindakan_paru=false,catatan_operasi_mata=false,hasil_pemeriksaan_spirometri=false,data_alergi_pasien=false,penilaian_derajat_dehidrasi2=false,pemeriksaan_eeg=false;
 
     public static void setData(String user, String pass) {
         try {
@@ -1362,7 +1362,6 @@ public final class akses {
                         akses.penilaian_psikologi_klinis=true;
                         akses.penilaian_awal_medis_ranap_neonatus=true;
                         akses.penilaian_derajat_dehidrasi=true;
-                        akses.penilaian_derajat_dehidrasi2=true;
                         akses.ringkasan_jasa_tindakan_medis=true;
                         akses.pendapatan_per_akun=true;
                         akses.hasil_pemeriksaan_echo=true;
@@ -1391,6 +1390,8 @@ public final class akses {
                         akses.catatan_operasi_mata=true;
                         akses.hasil_pemeriksaan_spirometri=true;
                         akses.data_alergi_pasien=true;
+                        akses.penilaian_derajat_dehidrasi2=true;
+                        akses.pemeriksaan_eeg=true;
                     }else if(rs2.getRow()>=1){
                         rs2.beforeFirst();
                         rs2.next();
@@ -2492,7 +2493,6 @@ public final class akses {
                         akses.penilaian_psikologi_klinis=rs2.getBoolean("penilaian_psikologi_klinis");
                         akses.penilaian_awal_medis_ranap_neonatus=rs2.getBoolean("penilaian_awal_medis_ranap_neonatus");
                         akses.penilaian_derajat_dehidrasi=rs2.getBoolean("penilaian_derajat_dehidrasi");
-                        akses.penilaian_derajat_dehidrasi2=rs2.getBoolean("penilaian_derajat_dehidrasi2");
                         akses.ringkasan_jasa_tindakan_medis=rs2.getBoolean("ringkasan_jasa_tindakan_medis");
                         akses.pendapatan_per_akun=rs2.getBoolean("pendapatan_per_akun");
                         akses.hasil_pemeriksaan_echo=rs2.getBoolean("hasil_pemeriksaan_echo");
@@ -2521,6 +2521,8 @@ public final class akses {
                         akses.catatan_operasi_mata= rs2.getBoolean("catatan_operasi_mata");
                         akses.hasil_pemeriksaan_spirometri = rs2.getBoolean("hasil_pemeriksaan_spirometri");
                         akses.data_alergi_pasien=rs2.getBoolean("data_alergi_pasien");
+                        akses.penilaian_derajat_dehidrasi2=rs2.getBoolean("penilaian_derajat_dehidrasi2");
+                        akses.pemeriksaan_eeg=rs2.getBoolean("pemeriksaan_eeg");
                     }else if((rs.getRow()==0)&&(rs2.getRow()==0)){
                         akses.kode="";
                         akses.penyakit= false;
@@ -3619,8 +3621,7 @@ public final class akses {
                         akses.ringkasan_hutang_vendor_dapur=false;
                         akses.penilaian_psikologi_klinis=false;
                         akses.penilaian_awal_medis_ranap_neonatus=false;
-                        akses.penilaian_derajat_dehidrasi=false;
-                        akses.penilaian_derajat_dehidrasi2=false;
+                        akses.penilaian_derajat_dehidrasi=false;    
                         akses.ringkasan_jasa_tindakan_medis=false;
                         akses.pendapatan_per_akun=false;
                         akses.hasil_pemeriksaan_echo=false;
@@ -3649,6 +3650,8 @@ public final class akses {
                         akses.catatan_operasi_mata=false;
                         akses.hasil_pemeriksaan_spirometri=false;
                         akses.data_alergi_pasien=false;
+                        akses.penilaian_derajat_dehidrasi2=false;
+                        akses.pemeriksaan_eeg=false;
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
@@ -4771,7 +4774,6 @@ public final class akses {
         akses.penilaian_psikologi_klinis=false;
         akses.penilaian_awal_medis_ranap_neonatus=false;
         akses.penilaian_derajat_dehidrasi=false;
-        akses.penilaian_derajat_dehidrasi2=false;
         akses.ringkasan_jasa_tindakan_medis=false;
         akses.pendapatan_per_akun=false;
         akses.hasil_pemeriksaan_echo=false;
@@ -4800,6 +4802,8 @@ public final class akses {
         akses.catatan_operasi_mata=false;
         akses.hasil_pemeriksaan_spirometri = false;
         akses.data_alergi_pasien=false;
+        akses.penilaian_derajat_dehidrasi2=false;
+        akses.pemeriksaan_eeg=false;
     }
 
     public static int getjml1() {return akses.jml1;}
@@ -5938,7 +5942,6 @@ public final class akses {
     public static boolean getpenilaian_psikologi_klinis(){return akses.penilaian_psikologi_klinis;}
     public static boolean getpenilaian_awal_medis_ranap_neonatus(){return akses.penilaian_awal_medis_ranap_neonatus;}
     public static boolean getpenilaian_derajat_dehidrasi(){return akses.penilaian_derajat_dehidrasi;}
-    public static boolean getpenilaian_derajat_dehidrasi2(){return akses.penilaian_derajat_dehidrasi2;}
     public static boolean getringkasan_jasa_tindakan_medis(){return akses.ringkasan_jasa_tindakan_medis;}
     public static boolean getpendapatan_per_akun(){return akses.pendapatan_per_akun;}
     public static boolean gethasil_pemeriksaan_echo(){return akses.hasil_pemeriksaan_echo;}
@@ -5967,4 +5970,6 @@ public final class akses {
     public static boolean getcatatan_operasi_mata(){return akses.catatan_operasi_mata;}
     public static boolean gethasil_pemeriksaan_spirometri(){return akses.hasil_pemeriksaan_spirometri;}
     public static boolean getdata_alergi_pasien(){return akses.data_alergi_pasien;}
+    public static boolean getpenilaian_derajat_dehidrasi2(){return akses.penilaian_derajat_dehidrasi2;}
+    public static boolean getpemeriksaan_eeg(){return akses.pemeriksaan_eeg;}
 }
