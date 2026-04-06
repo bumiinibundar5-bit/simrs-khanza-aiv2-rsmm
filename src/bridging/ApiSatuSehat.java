@@ -77,23 +77,17 @@ public class ApiSatuSehat {
     
     public RestTemplate getRest() throws NoSuchAlgorithmException, KeyManagementException {
         sslContext = SSLContext.getInstance("TLSv1.2");
-        TrustManager[] trustManagers = {
+        TrustManager[] trustManagers= {
             new X509TrustManager() {
-                public X509Certificate[] getAcceptedIssuers() {
-                    return null;
-                }
-
-                public void checkServerTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
-                }
-
-                public void checkClientTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
-                }
+                public X509Certificate[] getAcceptedIssuers() {return null;}
+                public void checkServerTrusted(X509Certificate[] arg0, String arg1)throws CertificateException {}
+                public void checkClientTrusted(X509Certificate[] arg0, String arg1)throws CertificateException {}
             }
         };
-        sslContext.init(null, trustManagers, new SecureRandom());
-        sslFactory = new SSLSocketFactory(sslContext, SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-        scheme = new Scheme("https", 443, sslFactory);
-        factory = new HttpComponentsClientHttpRequestFactory();
+        sslContext.init(null,trustManagers , new SecureRandom());
+        sslFactory=new SSLSocketFactory(sslContext,SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+        scheme=new Scheme("https",443,sslFactory);
+        factory=new HttpComponentsClientHttpRequestFactory();
         factory.getHttpClient().getConnectionManager().getSchemeRegistry().register(scheme);
         return new RestTemplate(factory);
     }

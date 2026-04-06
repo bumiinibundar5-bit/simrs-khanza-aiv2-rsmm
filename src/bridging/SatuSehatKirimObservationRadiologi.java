@@ -224,6 +224,8 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
         DTPCari2 = new widget.Tanggal();
         jLabel16 = new widget.Label();
         TCari = new widget.TextBox();
+        jLabel18 = new widget.Label();
+        cmbStatusKirim = new widget.ComboBox();
         BtnCari = new widget.Button();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
@@ -424,6 +426,21 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
         });
         panelGlass9.add(TCari);
 
+        jLabel18.setText("Status Kirim :");
+        jLabel18.setName("jLabel18"); // NOI18N
+        jLabel18.setPreferredSize(new java.awt.Dimension(80, 23));
+        panelGlass9.add(jLabel18);
+
+        cmbStatusKirim.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "Belum Terkirim", "Sudah Terkirim" }));
+        cmbStatusKirim.setName("cmbStatusKirim"); // NOI18N
+        cmbStatusKirim.setPreferredSize(new java.awt.Dimension(120, 23));
+        cmbStatusKirim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbStatusKirimActionPerformed(evt);
+            }
+        });
+        panelGlass9.add(cmbStatusKirim);
+
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
         BtnCari.setMnemonic('6');
         BtnCari.setToolTipText("Alt+6");
@@ -453,6 +470,10 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
+
+    private void cmbStatusKirimActionPerformed(java.awt.event.ActionEvent evt) {
+        tampil();
+    }
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -594,7 +615,7 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
                                     "\"identifier\": [" +
                                         "{" +
                                             "\"system\": \"http://sys-ids.kemkes.go.id/observation/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                            "\"value\": \""+tbObat.getValueAt(i,5).toString()+"."+tbObat.getValueAt(i,12).toString()+"\"" +
+                                            "\"value\": \""+tbObat.getValueAt(i,5).toString()+"\"" +
                                         "}" +
                                     "]," +
                                     "\"status\": \"final\"," +
@@ -628,13 +649,13 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
                                     "]," +
                                     "\"encounter\": {" +
                                         "\"reference\": \"Encounter/"+tbObat.getValueAt(i,17).toString()+"\"," +
-                                        "\"display\": \"Hasil Pemeriksaan Radiologi "+tbObat.getValueAt(i,7).toString()+" No.Rawat "+tbObat.getValueAt(i,1).toString()+", Atas Nama Pasien "+tbObat.getValueAt(i,3).toString()+", No.RM "+tbObat.getValueAt(i,2).toString()+", Pada Tanggal "+tbObat.getValueAt(i,6).toString()+"\"" +
+                                        "\"display\": \"Hasil Pemeriksaan Radiologi "+tbObat.getValueAt(i,7).toString().replace("\"","\\\"")+" No.Rawat "+tbObat.getValueAt(i,1).toString()+", Atas Nama Pasien "+tbObat.getValueAt(i,3).toString().replace("\"","\\\"").replace("\\","\\\\")+" No.RM "+tbObat.getValueAt(i,2).toString()+", Pada Tanggal "+tbObat.getValueAt(i,6).toString()+"\"" +
                                     "}," +
                                     "\"specimen\": {" +
                                         "\"reference\": \"Specimen/"+tbObat.getValueAt(i,13).toString()+"\"" +
                                     "}," +
-                                    "\"effectiveDateTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+08:00\"," +
-                                    "\"valueString\": \""+tbObat.getValueAt(i,11).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"" +
+                                    "\"effectiveDateTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"," +
+                                    "\"valueString\": \""+tbObat.getValueAt(i,11).toString().replace("\\","\\\\").replace("\"","\\\"").replace("\t","\\t").replace("\r\n","\\n").replace("\n","\\n").replace("\r","\\n")+"\"" +
                                "}";
                         System.out.println("URL : "+link+"/Observation");
                         System.out.println("Request JSON : "+json);
@@ -651,6 +672,8 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
                                 tbObat.setValueAt(false,i,0);
                             }
                         }
+                    }catch(org.springframework.web.client.HttpClientErrorException e){
+                        System.out.println("Notifikasi Bridging : "+e.getStatusCode()+" - "+e.getResponseBodyAsString());
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                     }
@@ -689,7 +712,7 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
                                     "\"identifier\": [" +
                                         "{" +
                                             "\"system\": \"http://sys-ids.kemkes.go.id/observation/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                            "\"value\": \""+tbObat.getValueAt(i,5).toString()+"."+tbObat.getValueAt(i,12).toString()+"\"" +
+                                            "\"value\": \""+tbObat.getValueAt(i,5).toString()+"\"" +
                                         "}" +
                                     "]," +
                                     "\"status\": \"final\"," +
@@ -723,13 +746,13 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
                                     "]," +
                                     "\"encounter\": {" +
                                         "\"reference\": \"Encounter/"+tbObat.getValueAt(i,17).toString()+"\"," +
-                                        "\"display\": \"Hasil Pemeriksaan Radiologi "+tbObat.getValueAt(i,7).toString()+" No.Rawat "+tbObat.getValueAt(i,1).toString()+", Atas Nama Pasien "+tbObat.getValueAt(i,3).toString()+", Pada Tanggal "+tbObat.getValueAt(i,6).toString()+"\"" +
+                                        "\"display\": \"Hasil Pemeriksaan Radiologi "+tbObat.getValueAt(i,7).toString().replace("\"","\\\"")+" No.Rawat "+tbObat.getValueAt(i,1).toString()+", Atas Nama Pasien "+tbObat.getValueAt(i,3).toString().replace("\"","\\\"").replace("\\","\\\\")+" No.RM "+tbObat.getValueAt(i,2).toString()+", Pada Tanggal "+tbObat.getValueAt(i,6).toString()+"\"" +
                                     "}," +
                                     "\"specimen\": {" +
                                         "\"reference\": \"Specimen/"+tbObat.getValueAt(i,13).toString()+"\"" +
                                     "}," +
-                                    "\"effectiveDateTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+08:00\"," +
-                                    "\"valueString\": \""+tbObat.getValueAt(i,11).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"" +
+                                    "\"effectiveDateTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"," +
+                                    "\"valueString\": \""+tbObat.getValueAt(i,11).toString().replace("\\","\\\\").replace("\"","\\\"").replace("\t","\\t").replace("\r\n","\\n").replace("\n","\\n").replace("\r","\\n")+"\"" +
                                "}";
                         System.out.println("URL : "+link+"/Observation/"+tbObat.getValueAt(i,18).toString());
                         System.out.println("Request JSON : "+json);
@@ -802,6 +825,8 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
     private javax.swing.JMenuItem ppBersihkan;
     private javax.swing.JMenuItem ppPilihSemua;
     private widget.Table tbObat;
+    private widget.ComboBox cmbStatusKirim;
+    private widget.Label jLabel18;
     // End of variables declaration//GEN-END:variables
     private void tampil() {
         Valid.tabelKosong(tabMode);
@@ -824,12 +849,14 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
                    "and periksa_radiologi.jam=hasil_radiologi.jam "+
                    "left join satu_sehat_observation_radiologi on satu_sehat_specimen_radiologi.noorder=satu_sehat_observation_radiologi.noorder "+
                    "and satu_sehat_specimen_radiologi.kd_jenis_prw=satu_sehat_observation_radiologi.kd_jenis_prw "+
-                   "inner join mutasi_berkas on mutasi_berkas.no_rawat=reg_periksa.no_rawat inner join satu_sehat_encounter on satu_sehat_encounter.no_rawat=reg_periksa.no_rawat "+
+                   "inner join nota_jalan on nota_jalan.no_rawat=reg_periksa.no_rawat inner join satu_sehat_encounter on satu_sehat_encounter.no_rawat=reg_periksa.no_rawat "+
                    "inner join pegawai on periksa_radiologi.kd_dokter=pegawai.nik "+
-                   "where date_format(mutasi_berkas.kembali, '%Y-%m-%d') between ? and ? "+
+                   "where nota_jalan.tanggal between ? and ? "+
                    (TCari.getText().equals("")?"":"and (reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "+
                    "pasien.nm_pasien like ? or pasien.no_ktp like ? or jns_perawatan_radiologi.nm_perawatan like ? or "+
-                   "satu_sehat_mapping_radiologi.sampel_code like ? or permintaan_radiologi.noorder like ?)"));
+                   "satu_sehat_mapping_radiologi.sampel_code like ? or permintaan_radiologi.noorder like ?)")+
+                   (cmbStatusKirim.getSelectedItem().equals("Belum Terkirim")?"and (satu_sehat_observation_radiologi.id_observation is null or satu_sehat_observation_radiologi.id_observation='') ":
+                    cmbStatusKirim.getSelectedItem().equals("Sudah Terkirim")?"and (satu_sehat_observation_radiologi.id_observation is not null and satu_sehat_observation_radiologi.id_observation!='') ":""));
             try {
                 ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
                 ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
@@ -879,9 +906,9 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
                    "and periksa_radiologi.jam=hasil_radiologi.jam "+
                    "left join satu_sehat_observation_radiologi on satu_sehat_specimen_radiologi.noorder=satu_sehat_observation_radiologi.noorder "+
                    "and satu_sehat_specimen_radiologi.kd_jenis_prw=satu_sehat_observation_radiologi.kd_jenis_prw "+
-                   "inner join kamar_inap on kamar_inap.no_rawat=reg_periksa.no_rawat inner join satu_sehat_encounter on satu_sehat_encounter.no_rawat=reg_periksa.no_rawat "+
+                   "inner join nota_inap on nota_inap.no_rawat=reg_periksa.no_rawat inner join satu_sehat_encounter on satu_sehat_encounter.no_rawat=reg_periksa.no_rawat "+
                    "inner join pegawai on periksa_radiologi.kd_dokter=pegawai.nik "+
-                   "where kamar_inap.tgl_keluar between ? and ? "+
+                   "where nota_inap.tanggal between ? and ? "+
                    (TCari.getText().equals("")?"":"and (reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "+
                    "pasien.nm_pasien like ? or pasien.no_ktp like ? or jns_perawatan_radiologi.nm_perawatan like ? or "+
                    "satu_sehat_mapping_radiologi.sampel_code like ? or permintaan_radiologi.noorder like ?)"));

@@ -95,6 +95,7 @@ import rekammedis.RMHasilEndoskopiHidung;
 import rekammedis.RMHasilEndoskopiTelinga;
 import rekammedis.RMHasilPemeriksaanEKG;
 import rekammedis.RMPemeriksaanEEG;
+import rekammedis.RMObservasiPasienDialisis;
 import rekammedis.RMHasilPemeriksaanSpirometri;
 import rekammedis.RMHasilPemeriksaanEcho;
 import rekammedis.RMHasilPemeriksaanUSG;
@@ -9840,6 +9841,25 @@ private void BtnDataAlergiPasienActionPerformed(java.awt.event.ActionEvent evt) 
         }
     }
 
+    //Observasi Pasien Dialisis//
+    private void BtnObservasiPasienDialisisActionPerformed(java.awt.event.ActionEvent evt) {
+    if(TPasien.getText().trim().equals("") || TNoRw.getText().trim().equals("")){
+        JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan mengklik data pada tabel...!!!");
+        TCari.requestFocus();
+    }else{
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        RMObservasiPasienDialisis form = new RMObservasiPasienDialisis(null, false);
+        form.isCek();
+        form.setSize(internalFrame1.getWidth()-20, internalFrame1.getHeight()-20);
+        form.setLocationRelativeTo(internalFrame1);
+        form.setVisible(true);
+        form.emptTeks();
+        form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
+     // form.tampil(); //
+        form.loadAwal();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+}
     //Spirometri//
     private void BtnHasilPemeriksaanSpirometriActionPerformed(java.awt.event.ActionEvent evt) {                                                            
         if(TPasien.getText().trim().equals("") || TNoRw.getText().trim().equals("")){
@@ -10856,7 +10876,7 @@ private void BtnDataAlergiPasienActionPerformed(java.awt.event.ActionEvent evt) 
                           BtnCatatanObservasiInduksiPersalinan,BtnSkriningMerokokUsiaRemaja,BtnSkriningKekerasanPadaWanita,BtnSkriningObesitas,BtnSkriningRisikoKankerPayudara,BtnSkriningRisikoKankerParu,
                           BtnSkriningKesehatanGigiMulutremaja,BtnSkriningTBC,BtnCatatanAnastesiSedasi,BtnSkriningPUMA,BtnSkriningAdiksiNikotin,BtnSkriningThalassemia,BtnSkriningInstrumenSDQ,BtnSkriningInstrumenSRQ,
                           BtnChecklistPemberianFibrinolitik,BtnSkriningKankerKolorektal,BtnPenilaianPsikologKlinis,BtnPenilaianDerajatDehidrasi,BtnPenilaianDerajatDehidrasi2,BtnHasilPemeriksaanECHO,BtnOperasiMata,BtnPenilaianBayiBaruLahir,BtnSkriningDiabetesMelitus,
-                          BtnLaporanTindakan,BtnPermintaanKonsultasiMedik,BtnHasilPemeriksaanSpirometri,BtnLayananKedokteranFisikRehabilitasi,BtnPelaksanaanInformasiEdukasi,BtnPemeriksaanEEG;;
+                          BtnLaporanTindakan,BtnPermintaanKonsultasiMedik,BtnHasilPemeriksaanSpirometri,BtnLayananKedokteranFisikRehabilitasi,BtnPelaksanaanInformasiEdukasi,BtnPemeriksaanEEG,BtnObservasiPasienDialisis;
     private void tampilDr() {
         Valid.tabelKosong(tabModeDr);
         try{
@@ -11627,7 +11647,10 @@ private void BtnDataAlergiPasienActionPerformed(java.awt.event.ActionEvent evt) 
         if(akses.gethasil_pemeriksaan_ekg()==true){
             tinggi=tinggi+24;
         }
-            
+        BtnObservasiPasienDialisis.setVisible(akses.getobservasi_pasien_dialisis());
+        if(akses.getobservasi_pasien_dialisis()==true){
+            tinggi=tinggi+24;
+        }   
         }
         BtnHasilPemeriksaanSpirometri.setVisible(akses.gethasil_pemeriksaan_spirometri());
         if(akses.gethasil_pemeriksaan_spirometri()==true){
@@ -13157,6 +13180,19 @@ public void bukaDariBookingOperasi(String norawat) {
         BtnPemeriksaanEEG.setRoundRect(false);
         BtnPemeriksaanEEG.addActionListener(this::BtnPemeriksaanEEGActionPerformed);
 
+        BtnObservasiPasienDialisis = new widget.Button();
+        BtnObservasiPasienDialisis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
+        BtnObservasiPasienDialisis.setText("Observasi Pasien Dialisis");
+        BtnObservasiPasienDialisis.setFocusPainted(false);
+        BtnObservasiPasienDialisis.setFont(new java.awt.Font("Tahoma", 0, 11));
+        BtnObservasiPasienDialisis.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnObservasiPasienDialisis.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnObservasiPasienDialisis.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnObservasiPasienDialisis.setName("BtnObservasiPasienDialisis");
+        BtnObservasiPasienDialisis.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnObservasiPasienDialisis.setRoundRect(false);
+        BtnObservasiPasienDialisis.addActionListener(this::BtnObservasiPasienDialisisActionPerformed);
+
         BtnHasilPemeriksaanSpirometri = new widget.Button();
         BtnHasilPemeriksaanSpirometri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
         BtnHasilPemeriksaanSpirometri.setText("Hasil Pemeriksaan Spirometri");
@@ -13729,6 +13765,7 @@ public void bukaDariBookingOperasi(String norawat) {
         FormMenu.add(BtnHasilPemeriksaanUSGGynecologi);
         FormMenu.add(BtnHasilPemeriksaanEKG);
         FormMenu.add(BtnPemeriksaanEEG);
+        FormMenu.add(BtnObservasiPasienDialisis);
         FormMenu.add(BtnHasilPemeriksaanSpirometri);
         FormMenu.add(BtnHasilPemeriksaanECHO);
         FormMenu.add(BtnOperasiMata);

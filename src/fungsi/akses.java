@@ -244,7 +244,7 @@ public final class akses {
             laporan_tindakan=false,pelaksanaan_informasi_edukasi=false,layanan_kedokteran_fisik_rehabilitasi=false,skrining_kesehatan_gigi_mulut_balita=false,skrining_anemia=false,
             layanan_program_kfr=false,skrining_hipertensi=false,skrining_kesehatan_penglihatan=false,catatan_observasi_hemodialisa=false,skrining_kesehatan_gigi_mulut_dewasa=false,
             skrining_risiko_kanker_serviks=false,catatan_cairan_hemodialisa=false,skrining_kesehatan_gigi_mulut_lansia=false,skrining_indra_pendengaran=false,
-            catatan_pengkajian_paska_operasi=false,surat_pernyataan_kronologis=false,laporan_tindakan_paru=false,catatan_operasi_mata=false,hasil_pemeriksaan_spirometri=false,data_alergi_pasien=false,penilaian_derajat_dehidrasi2=false,pemeriksaan_eeg=false;
+            catatan_pengkajian_paska_operasi=false,surat_pernyataan_kronologis=false,laporan_tindakan_paru=false,catatan_operasi_mata=false,hasil_pemeriksaan_spirometri=false,data_alergi_pasien=false,penilaian_derajat_dehidrasi2=false,pemeriksaan_eeg=false,observasi_pasien_dialisis=false,satu_sehat_kirim_imagestudy_radiologi=false,satu_sehat_kirim_allergyintolerance=false;;;
 
     public static void setData(String user, String pass) {
         try {
@@ -1392,6 +1392,10 @@ public final class akses {
                         akses.data_alergi_pasien=true;
                         akses.penilaian_derajat_dehidrasi2=true;
                         akses.pemeriksaan_eeg=true;
+                        akses.observasi_pasien_dialisis=true;
+                        akses.satu_sehat_kirim_imagestudy_radiologi=true;
+                        akses.satu_sehat_kirim_allergyintolerance = true;
+
                     }else if(rs2.getRow()>=1){
                         rs2.beforeFirst();
                         rs2.next();
@@ -2523,6 +2527,9 @@ public final class akses {
                         akses.data_alergi_pasien=rs2.getBoolean("data_alergi_pasien");
                         akses.penilaian_derajat_dehidrasi2=rs2.getBoolean("penilaian_derajat_dehidrasi2");
                         akses.pemeriksaan_eeg=rs2.getBoolean("pemeriksaan_eeg");
+                        akses.observasi_pasien_dialisis=rs2.getBoolean("observasi_pasien_dialisis");
+                        akses.satu_sehat_kirim_imagestudy_radiologi = rs2.getBoolean("satu_sehat_kirim_imagestudy_radiologi");
+                        akses.satu_sehat_kirim_allergyintolerance = rs2.getBoolean("satu_sehat_kirim_allergyintolerance");
                     }else if((rs.getRow()==0)&&(rs2.getRow()==0)){
                         akses.kode="";
                         akses.penyakit= false;
@@ -3652,6 +3659,9 @@ public final class akses {
                         akses.data_alergi_pasien=false;
                         akses.penilaian_derajat_dehidrasi2=false;
                         akses.pemeriksaan_eeg=false;
+                        akses.observasi_pasien_dialisis=false;
+                        akses.satu_sehat_kirim_imagestudy_radiologi = false;
+                        akses.satu_sehat_kirim_allergyintolerance = false;                   
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
@@ -4804,6 +4814,9 @@ public final class akses {
         akses.data_alergi_pasien=false;
         akses.penilaian_derajat_dehidrasi2=false;
         akses.pemeriksaan_eeg=false;
+        akses.observasi_pasien_dialisis=false;
+        akses.satu_sehat_kirim_imagestudy_radiologi=false;
+        akses.satu_sehat_kirim_allergyintolerance = false;
     }
 
     public static int getjml1() {return akses.jml1;}
@@ -5972,4 +5985,7 @@ public final class akses {
     public static boolean getdata_alergi_pasien(){return akses.data_alergi_pasien;}
     public static boolean getpenilaian_derajat_dehidrasi2(){return akses.penilaian_derajat_dehidrasi2;}
     public static boolean getpemeriksaan_eeg(){return akses.pemeriksaan_eeg;}
+    public static boolean getobservasi_pasien_dialisis(){return akses.observasi_pasien_dialisis;}
+    public static boolean getsatu_sehat_kirim_imagestudy_radiologi(){return akses.satu_sehat_kirim_imagestudy_radiologi;}
+    public static boolean getsatu_sehat_kirim_allergyintolerance(){return akses.satu_sehat_kirim_allergyintolerance;}
 }

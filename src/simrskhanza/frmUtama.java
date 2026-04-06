@@ -478,9 +478,11 @@ import bridging.SatuSehatKirimCondition;
 import bridging.SatuSehatKirimDiagnosticReportLabMB;
 import bridging.SatuSehatKirimDiagnosticReportLabPK;
 import bridging.SatuSehatKirimDiagnosticReportRadiologi;
+import bridging.SatuSehatKirimImageStudyRadiologi;
 import bridging.SatuSehatKirimDiet;
 import bridging.SatuSehatKirimEncounter;
 import bridging.DlgDataAlergiPasien;
+import bridging.SatuSehatKirimAllergyIntollerance;
 import bridging.SatuSehatKirimMedication;
 import bridging.SatuSehatKirimMedicationDispense;
 import bridging.SatuSehatKirimMedicationRequest;
@@ -19743,6 +19745,17 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     this.setCursor(Cursor.getDefaultCursor());
     }     
     //Oxy
+    private void btnKirimAllergyIntolleranceActionPerformed(java.awt.event.ActionEvent evt) {                                                   
+    isTutup();
+    DlgHome.dispose();
+    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+    SatuSehatKirimAllergyIntollerance aplikasi = new SatuSehatKirimAllergyIntollerance(this, false);
+    aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+    aplikasi.setLocationRelativeTo(PanelUtama);
+    aplikasi.setVisible(true);
+    aplikasi.isCek();
+    this.setCursor(Cursor.getDefaultCursor());
+}
 
     private void btnCatatanCekGDSActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
@@ -21175,6 +21188,18 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         SatuSehatKirimDiagnosticReportRadiologi aplikasi=new SatuSehatKirimDiagnosticReportRadiologi(this,false);
+        aplikasi.isCek();
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+        private void btnKirimImageStudyRadiologiSatuSehatActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        SatuSehatKirimImageStudyRadiologi aplikasi=new SatuSehatKirimImageStudyRadiologi(this,false);
         aplikasi.isCek();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
@@ -22878,7 +22903,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnRingkasanPengajuanDapur,btnRingkasanPemesananDapur,btnRingkasanReturBeliDapur,btnRingkasanStokKeluarDapur,btnStokKeluarDapurPerTanggal,btnSirkulasiDapur,btnSirkulasiDapur2,
             btnVerifikasiPenerimaanDapur,btnNilaiPenerimaanVendorDapurPerBulan,btnRingkasanHutangVendorBarangDapur,btnPenilaianPsikologiKlinis,btnPenilaianAwalMedisRanapNeonatus,
             btnPenilaianDerajatDehidrasi,btnRingkasanJasaTindakanPasien,btnPendapatanPerAkun,btnHasilPemeriksaanECHO,btnRl13KetersediaanKamar,btnPendapatanPerAkunClosing,
-            btnPenilaianBayiBaruLahir,btnPengeluaranPengeluaran,btnSkriningDiabetesMelitus;
+            btnPenilaianBayiBaruLahir,btnPengeluaranPengeluaran,btnSkriningDiabetesMelitus,btnKirimImageStudyRadiologiSatuSehat,btnKirimAllergyIntollerance;
 
     public void isWall(){
         try{
@@ -26117,6 +26142,12 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                  jmlmenu++;
             }
             //Oxy
+
+            if(akses.getsatu_sehat_kirim_allergyintolerance()){
+                Panelmenu.add(btnKirimAllergyIntollerance);
+                jmlmenu++;
+            }
+
             if(akses.getsatu_sehat_kirim_condition()==true){
                 Panelmenu.add(btnKirimConditionSatuSehat);
                 jmlmenu++;
@@ -26201,6 +26232,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 Panelmenu.add(btnKirimDiagnosticReportSatuSehat);
                 jmlmenu++;
             }
+
+
+        if(akses.getsatu_sehat_kirim_imagestudy_radiologi()==true){
+        Panelmenu.add(btnKirimImageStudyRadiologiSatuSehat);
+        jmlmenu++;
+       }
+        
 
             if(akses.getsatu_sehat_kirim_servicerequest_lab()==true){
                 Panelmenu.add(btnKirimServiceRequestLabPKSatuSehat);
@@ -31577,6 +31615,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             jmlmenu++;
         }
         //Oxy
+
+        
+        if(akses.getsatu_sehat_kirim_allergyintolerance()){
+    Panelmenu.add(btnKirimAllergyIntollerance);
+    jmlmenu++;
+}
+
 
         if(akses.getsatu_sehat_kirim_condition()==true){
             Panelmenu.add(btnKirimConditionSatuSehat);
@@ -38271,6 +38316,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         }
         //Oxy
 
+            if(akses.getsatu_sehat_kirim_allergyintolerance()){
+    if(btnKirimAllergyIntollerance.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+        Panelmenu.add(btnKirimAllergyIntollerance);
+        jmlmenu++;
+            }
+        }
+
         if(akses.getsatu_sehat_kirim_condition()==true){
             if(btnKirimConditionSatuSehat.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnKirimConditionSatuSehat);
@@ -38382,6 +38434,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 jmlmenu++;
             }
         }
+
+        if(akses.getsatu_sehat_kirim_imagestudy_radiologi()){
+    if(btnKirimImageStudyRadiologiSatuSehat.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+        Panelmenu.add(btnKirimImageStudyRadiologiSatuSehat);
+        jmlmenu++;
+    }
+}
 
         if(akses.getsatu_sehat_kirim_servicerequest_radiologi()==true){
             if(btnKirimServiceRequestRadiologiSatuSehat.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
@@ -45089,6 +45148,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnDataAlergiPasien.addActionListener(this::btnDataAlergiPasienActionPerformed);
         //Oxy
 
+        btnKirimAllergyIntollerance = new widget.ButtonBig();
+        btnKirimAllergyIntollerance.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
+        btnKirimAllergyIntollerance.setText("Kirim Allergy Intolerance");
+        btnKirimAllergyIntollerance.setIconTextGap(0);
+        btnKirimAllergyIntollerance.setName("btnKirimAllergyIntollerance");
+        btnKirimAllergyIntollerance.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnKirimAllergyIntollerance.addActionListener(this::btnKirimAllergyIntolleranceActionPerformed);
+
         btnCatatanCekGDS = new widget.ButtonBig();
         btnCatatanCekGDS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6427847_information_note_notebook_sheet_icon.png")));
         btnCatatanCekGDS.setText("Catatan Cek GDS");
@@ -46096,6 +46163,15 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnKirimDiagnosticReportSatuSehat.setName("btnKirimDiagnosticReportSatuSehat");
         btnKirimDiagnosticReportSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimDiagnosticReportSatuSehat.addActionListener(this::btnKirimDiagnosticReportSatuSehatActionPerformed);
+
+        btnKirimImageStudyRadiologiSatuSehat = new widget.ButtonBig();
+        btnKirimImageStudyRadiologiSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
+        btnKirimImageStudyRadiologiSatuSehat.setText("Kirim Imaging Study Radiologi Satu Sehat");
+        btnKirimImageStudyRadiologiSatuSehat.setIconTextGap(0);
+        btnKirimImageStudyRadiologiSatuSehat.setName("btnKirimImageStudyRadiologiSatuSehat");
+        btnKirimImageStudyRadiologiSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnKirimImageStudyRadiologiSatuSehat.addActionListener(this::btnKirimImageStudyRadiologiSatuSehatActionPerformed);
+
 
         btnKirimDiagnosticReportLabPKSatuSehat = new widget.ButtonBig();
         btnKirimDiagnosticReportLabPKSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
