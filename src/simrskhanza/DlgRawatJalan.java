@@ -13284,7 +13284,7 @@ public void bukaDariBookingOperasi(String norawat) {
         BtnPenilaianBayiBaruLahir.setPreferredSize(new java.awt.Dimension(190, 23));
         BtnPenilaianBayiBaruLahir.setRoundRect(false);
         BtnPenilaianBayiBaruLahir.addActionListener(this::BtnPenilaianBayiBaruLahirActionPerformed);
-
+/* 
         BtnPenilaianDerajatDehidrasi = new widget.Button();
         BtnPenilaianDerajatDehidrasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
         BtnPenilaianDerajatDehidrasi.setText("Penilaian Derajat Dehidrasi");
@@ -13297,7 +13297,7 @@ public void bukaDariBookingOperasi(String norawat) {
         BtnPenilaianDerajatDehidrasi.setPreferredSize(new java.awt.Dimension(190, 23));
         BtnPenilaianDerajatDehidrasi.setRoundRect(false);
         BtnPenilaianDerajatDehidrasi.addActionListener(this::BtnPenilaianDerajatDehidrasiActionPerformed);
-
+*/
         BtnPenilaianDerajatDehidrasi2 = new widget.Button();
         BtnPenilaianDerajatDehidrasi2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
         BtnPenilaianDerajatDehidrasi2.setText("Penilaian Derajat Dehidrasi 2");

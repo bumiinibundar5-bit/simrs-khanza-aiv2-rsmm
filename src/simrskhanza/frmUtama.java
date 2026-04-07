@@ -46228,7 +46228,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnPenilaianPasienImunitasRendah.setName("btnPenilaianPasienImunitasRendah");
         btnPenilaianPasienImunitasRendah.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianPasienImunitasRendah.addActionListener(this::btnPenilaianPasienImunitasRendahActionPerformed);
-
+/* 
         btnPenilaianDerajatDehidrasi = new widget.ButtonBig();
         btnPenilaianDerajatDehidrasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/897234_aqua_bottle_drink_water_icon.png")));
         btnPenilaianDerajatDehidrasi.setText("Penilaian Derajat Dehidrasi");
@@ -46236,7 +46236,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnPenilaianDerajatDehidrasi.setName("btnPenilaianDerajatDehidrasi");
         btnPenilaianDerajatDehidrasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianDerajatDehidrasi.addActionListener(this::btnPenilaianDerajatDehidrasiActionPerformed);
-
+*/
         btnCatatanKeseimbanganCairan = new widget.ButtonBig();
         btnCatatanKeseimbanganCairan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/7150134_water_drink_drop_blue_icon.png")));
         btnCatatanKeseimbanganCairan.setText("Keseimbangan Cairan");
