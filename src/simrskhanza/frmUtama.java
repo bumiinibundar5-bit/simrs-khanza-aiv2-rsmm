@@ -22107,6 +22107,20 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         this.setCursor(Cursor.getDefaultCursor());
     }
 
+    //penilaianDehidrasi2//
+    private void btnPenilaianDerajatDehidrasi2ActionPerformed(java.awt.event.ActionEvent evt) {
+    isTutup();
+    DlgHome.dispose();
+    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+    RMPenilaianDerajatDehidrasi2 aplikasi = new RMPenilaianDerajatDehidrasi2(this,false);
+    aplikasi.isCek();
+    aplikasi.emptTeks();
+    aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+    aplikasi.setLocationRelativeTo(PanelUtama);
+    aplikasi.setVisible(true);
+    this.setCursor(Cursor.getDefaultCursor());
+    }
+
     private void btnRingkasanJasaTindakanPasienActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         DlgHome.dispose();
@@ -22902,7 +22916,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnHutangDapur,btnTagihanHutangDapur,btnValidasiTagihanDapur,btnSuratPemesananDapur,btnPengajuanBarangDapur,btnReturBarangDapur,btnHibahDapur,btnRingkasanPenerimaanDapur,
             btnRingkasanPengajuanDapur,btnRingkasanPemesananDapur,btnRingkasanReturBeliDapur,btnRingkasanStokKeluarDapur,btnStokKeluarDapurPerTanggal,btnSirkulasiDapur,btnSirkulasiDapur2,
             btnVerifikasiPenerimaanDapur,btnNilaiPenerimaanVendorDapurPerBulan,btnRingkasanHutangVendorBarangDapur,btnPenilaianPsikologiKlinis,btnPenilaianAwalMedisRanapNeonatus,
-            btnPenilaianDerajatDehidrasi,btnRingkasanJasaTindakanPasien,btnPendapatanPerAkun,btnHasilPemeriksaanECHO,btnRl13KetersediaanKamar,btnPendapatanPerAkunClosing,
+            btnPenilaianDerajatDehidrasi,btnPenilaianDerajatDehidrasi2,btnRingkasanJasaTindakanPasien,btnPendapatanPerAkun,btnHasilPemeriksaanECHO,btnRl13KetersediaanKamar,btnPendapatanPerAkunClosing,
             btnPenilaianBayiBaruLahir,btnPengeluaranPengeluaran,btnSkriningDiabetesMelitus,btnKirimImageStudyRadiologiSatuSehat,btnKirimAllergyIntollerance;
 
     public void isWall(){
@@ -26897,9 +26911,15 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 jmlmenu++;
             }
 
+        //     if(akses.getpenilaian_derajat_dehidrasi()==true){
+        //       Panelmenu.add(btnPenilaianDerajatDehidrasi);
+        //       jmlmenu++;
+        //    } 
+        
+            //dehidrasi2//
             if(akses.getpenilaian_derajat_dehidrasi()==true){
-                Panelmenu.add(btnPenilaianDerajatDehidrasi);
-                jmlmenu++;
+            Panelmenu.add(btnPenilaianDerajatDehidrasi2);
+            jmlmenu++;
             }
 
             if(akses.getpenilaian_pasien_keracunan()==true){
@@ -32364,9 +32384,15 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             jmlmenu++;
         }
 
+    //  if(akses.getpenilaian_derajat_dehidrasi()==true){
+    //      Panelmenu.add(btnPenilaianDerajatDehidrasi);
+    //    jmlmenu++;
+    //  }
+    
+        //Dehidrasi//
         if(akses.getpenilaian_derajat_dehidrasi()==true){
-            Panelmenu.add(btnPenilaianDerajatDehidrasi);
-            jmlmenu++;
+        Panelmenu.add(btnPenilaianDerajatDehidrasi2);
+        jmlmenu++;
         }
 
         if(akses.getpenilaian_pasien_keracunan()==true){
@@ -39372,6 +39398,15 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             }
         }
 
+        //Dehidrasi/
+        if(akses.getpenilaian_derajat_dehidrasi()==true){
+        if(btnPenilaianDerajatDehidrasi.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+            Panelmenu.add(btnPenilaianDerajatDehidrasi);
+            jmlmenu++;
+        }
+     }
+
+
         if(akses.getpenilaian_pasien_keracunan()==true){
             if(btnPenilaianPasienKeracunan.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnPenilaianPasienKeracunan);
@@ -46228,7 +46263,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnPenilaianPasienImunitasRendah.setName("btnPenilaianPasienImunitasRendah");
         btnPenilaianPasienImunitasRendah.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianPasienImunitasRendah.addActionListener(this::btnPenilaianPasienImunitasRendahActionPerformed);
-/* 
+
         btnPenilaianDerajatDehidrasi = new widget.ButtonBig();
         btnPenilaianDerajatDehidrasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/897234_aqua_bottle_drink_water_icon.png")));
         btnPenilaianDerajatDehidrasi.setText("Penilaian Derajat Dehidrasi");
@@ -46236,7 +46271,16 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnPenilaianDerajatDehidrasi.setName("btnPenilaianDerajatDehidrasi");
         btnPenilaianDerajatDehidrasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianDerajatDehidrasi.addActionListener(this::btnPenilaianDerajatDehidrasiActionPerformed);
-*/
+
+        //Dehidrasi//
+        btnPenilaianDerajatDehidrasi2 = new widget.ButtonBig();
+        btnPenilaianDerajatDehidrasi2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/897234_aqua_bottle_drink_water_icon.png")));
+        btnPenilaianDerajatDehidrasi2.setText("Penilaian Derajat Dehidrasi 2");
+        btnPenilaianDerajatDehidrasi2.setIconTextGap(0);
+        btnPenilaianDerajatDehidrasi2.setName("btnPenilaianDerajatDehidrasi2");
+        btnPenilaianDerajatDehidrasi2.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnPenilaianDerajatDehidrasi2.addActionListener(this::btnPenilaianDerajatDehidrasi2ActionPerformed);
+
         btnCatatanKeseimbanganCairan = new widget.ButtonBig();
         btnCatatanKeseimbanganCairan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/7150134_water_drink_drop_blue_icon.png")));
         btnCatatanKeseimbanganCairan.setText("Keseimbangan Cairan");
