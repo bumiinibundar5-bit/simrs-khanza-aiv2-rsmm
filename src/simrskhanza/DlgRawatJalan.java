@@ -11766,12 +11766,18 @@ private void BtnDataAlergiPasienActionPerformed(java.awt.event.ActionEvent evt) 
             tinggi=tinggi+24;
         }
     
-        BtnPenilaianDerajatDehidrasi.setVisible(false); // [CUSTOM] disembunyikan, digantikan Dehidrasi2
-        //      BtnPenilaianDerajatDehidrasi.setVisible(akses.getpenilaian_derajat_dehidrasi());
-        //       if(akses.getpenilaian_derajat_dehidrasi()==true){
-        //      tinggi=tinggi+24;
-        //       } 
-       
+        BtnPenilaianDerajatDehidrasi.setVisible(false); // [CUSTOM 09042026] disembunyikan, digantikan Dehidrasi2
+        BtnPenilaianDerajatDehidrasi2.setVisible(akses.getpenilaian_derajat_dehidrasi2());
+        if(akses.getpenilaian_derajat_dehidrasi2()==true){
+            tinggi=tinggi+24;
+        }
+        
+      /*       BtnPenilaianDerajatDehidrasi.setVisible(akses.getpenilaian_derajat_dehidrasi()); //custom09042026//
+               if(akses.getpenilaian_derajat_dehidrasi()==true){
+              tinggi=tinggi+24;
+              } 
+       */ 
+
         BtnPenilaianDerajatDehidrasi2.setVisible(akses.getpenilaian_derajat_dehidrasi2());
         if(akses.getpenilaian_derajat_dehidrasi2()==true){
             tinggi=tinggi+24;
@@ -13837,6 +13843,8 @@ public void bukaDariBookingOperasi(String norawat) {
 
         for(Component component : components) {
             if(component instanceof JButton) {
+                // [CUSTOM 09042026] BtnPenilaianDerajatDehidrasi (bawaan) tetap disembunyikan
+                if(component == BtnPenilaianDerajatDehidrasi) continue;
                 JButton btn = (JButton) component;
                 String buttonText = btn.getText().toLowerCase();
 

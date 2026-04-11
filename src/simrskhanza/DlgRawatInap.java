@@ -122,6 +122,7 @@ import rekammedis.RMPenilaianAwalMedisRanapKandungan;
 import rekammedis.RMPenilaianAwalMedisRanapNeonatus;
 import rekammedis.RMPenilaianBayiBaruLahir;
 import rekammedis.RMPenilaianDerajatDehidrasi;
+import rekammedis.RMPenilaianDerajatDehidrasi2;
 import rekammedis.RMPenilaianFisioterapi;
 import rekammedis.RMPenilaianKorbanKekerasan;
 import rekammedis.RMPenilaianLanjutanRisikoJatuhAnak;
@@ -8675,6 +8676,28 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
     }
 
+// ===== Custom by ChatGPT PenilaianDerajatDehidrasi2 START =====
+        private void BtnPenilaianDerajatDehidrasi2ActionPerformed(java.awt.event.ActionEvent evt) {
+        if(TPasien.getText().trim().equals("") || TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        } else {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            
+            RMPenilaianDerajatDehidrasi2 form = new RMPenilaianDerajatDehidrasi2(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20, internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
+            form.tampil();
+            
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }
+
+
     private void BtnHasilPemeriksaanECHOActionPerformed(java.awt.event.ActionEvent evt) {
         if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
@@ -9151,7 +9174,7 @@ private void BtnSuratPernyataanKronologisActionPerformed(java.awt.event.ActionEv
     // End of variables declaration//GEN-END:variables
     private widget.Button BtnSkorBromagePascaAnestesi,BtnPenilaianPreInduksi,BtnHasilPemeriksaanUSGUrologi,BtnHasilPemeriksaanUSGGynecologi,BtnHasilPemeriksaanEKG,BtnHasilPemeriksaanUSGNeonatus,BtnHasilEndoskopiFaringLaring,BtnHasilEndoskopiHidung,BtnHasilEndoskopiTelinga,
                           BtnAwalKeperawatanNeonatus,BtnPenilaianPasienImunitasRendah,BtnCatatanKeseimbanganCairan,BtnCatatanObservasiCHBP,BtnCatatanObservasiInduksiPersalinan,BtnAwalKeperawatanBayiAnak,BtnCatatanObservasiRestrainNonfarmakologi,
-                          BtnCatatanObservasiVentilator,BtnCatatanAnastesiSedasi,BtnChecklistPemberianFibrinolitik,BtnPenilaianPsikologKlinis,BtnAwalMedisNeonatus,BtnPenilaianDerajatDehidrasi,BtnHasilPemeriksaanECHO,BtnPenilaianBayiBaruLahir,BtnLaporanTindakan,BtnLaporanTindakanParu,BtnHasilPemeriksaanSpirometri,BtnSuratPernyataanKronologis,BtnDataAlergiPasien;
+                          BtnCatatanObservasiVentilator,BtnCatatanAnastesiSedasi,BtnChecklistPemberianFibrinolitik,BtnPenilaianPsikologKlinis,BtnAwalMedisNeonatus,BtnPenilaianDerajatDehidrasi,BtnPenilaianDerajatDehidrasi2,BtnHasilPemeriksaanECHO,BtnPenilaianBayiBaruLahir,BtnLaporanTindakan,BtnLaporanTindakanParu,BtnHasilPemeriksaanSpirometri,BtnSuratPernyataanKronologis,BtnDataAlergiPasien;
 
     public void tampilDr() {
         Valid.tabelKosong(tabModeDr);
@@ -9985,11 +10008,17 @@ private void BtnSuratPernyataanKronologisActionPerformed(java.awt.event.ActionEv
         if(akses.getcatatan_anestesi_sedasi()==true){
             tinggi=tinggi+24;
         }
-        BtnPenilaianDerajatDehidrasi.setVisible(akses.getpenilaian_derajat_dehidrasi());
-        if(akses.getpenilaian_derajat_dehidrasi()==true){
+
+        // [CUSTOM 09042026] Penilaian Derajat Dehidrasi digantikan dengan Penilaian Derajat Dehidrasi2
+        BtnPenilaianDerajatDehidrasi.setVisible(false); // [CUSTOM 09042026] disembunyikan, digantikan Dehidrasi2
+        BtnPenilaianDerajatDehidrasi2.setVisible(akses.getpenilaian_derajat_dehidrasi2());
+        if(akses.getpenilaian_derajat_dehidrasi2()==true){
             tinggi=tinggi+24;
         }
+        // [CUSTOM 09042026] Penilaian Derajat Dehidrasi digantikan dengan Penilaian Derajat Dehidrasi2
+
         FormMenu.setPreferredSize(new Dimension(195,(tinggi+10)));
+        
 
         if(akses.getjml2()>=1){
             KdPeg.setText(akses.getkode());
@@ -10645,7 +10674,7 @@ private void BtnSuratPernyataanKronologisActionPerformed(java.awt.event.ActionEv
         BtnCatatanObservasiVentilator.setRoundRect(false);
         BtnCatatanObservasiVentilator.addActionListener(this::BtnCatatanObservasiVentilatorActionPerformed);
 
-/*
+/*      
         BtnPermintaanKonsultasiMedik = new widget.Button();
         BtnPermintaanKonsultasiMedik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
         BtnPermintaanKonsultasiMedik.setText("Konsultasi Medik");
@@ -10698,6 +10727,21 @@ private void BtnSuratPernyataanKronologisActionPerformed(java.awt.event.ActionEv
         BtnPenilaianDerajatDehidrasi.setPreferredSize(new java.awt.Dimension(190, 23));
         BtnPenilaianDerajatDehidrasi.setRoundRect(false);
         BtnPenilaianDerajatDehidrasi.addActionListener(this::BtnPenilaianDerajatDehidrasiActionPerformed);
+
+        // ===== Custom by ChatGPT PenilaianDerajatDehidrasi2 START =====
+        BtnPenilaianDerajatDehidrasi2 = new widget.Button();
+        BtnPenilaianDerajatDehidrasi2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
+        BtnPenilaianDerajatDehidrasi2.setText("Penilaian Derajat Dehidrasi 2");
+        BtnPenilaianDerajatDehidrasi2.setFocusPainted(false);
+        BtnPenilaianDerajatDehidrasi2.setFont(new java.awt.Font("Tahoma", 0, 11));
+        BtnPenilaianDerajatDehidrasi2.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnPenilaianDerajatDehidrasi2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPenilaianDerajatDehidrasi2.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPenilaianDerajatDehidrasi2.setName("BtnPenilaianDerajatDehidrasi2");
+        BtnPenilaianDerajatDehidrasi2.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnPenilaianDerajatDehidrasi2.setRoundRect(false);
+        BtnPenilaianDerajatDehidrasi2.addActionListener(this::BtnPenilaianDerajatDehidrasi2ActionPerformed);
+        // ===== Custom by ChatGPT PenilaianDerajatDehidrasi2 END =====
 
         BtnCatatanAnastesiSedasi = new widget.Button();
         BtnCatatanAnastesiSedasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
@@ -10897,7 +10941,8 @@ private void BtnSuratPernyataanKronologisActionPerformed(java.awt.event.ActionEv
         FormMenu.add(BtnPenilaianTambahanBunuhDiri);
         FormMenu.add(BtnPenilaianTambahanPerilakuKekerasan);
         FormMenu.add(BtnPenilaianTambahanMelarikanDiri);
-        FormMenu.add(BtnPenilaianDerajatDehidrasi);
+     //   FormMenu.add(BtnPenilaianDerajatDehidrasi); //
+        FormMenu.add(BtnPenilaianDerajatDehidrasi2);
     }
 
     private void simpan() {
@@ -11782,6 +11827,8 @@ private void BtnSuratPernyataanKronologisActionPerformed(java.awt.event.ActionEv
         Component[] components = FormMenu.getComponents();
         for(Component component : components) {
             if(component instanceof JButton) {
+                // [CUSTOM 09042026] BtnPenilaianDerajatDehidrasi (bawaan) tetap disembunyikan
+                if(component == BtnPenilaianDerajatDehidrasi) continue;
                 component.setVisible(true);
             }
         }

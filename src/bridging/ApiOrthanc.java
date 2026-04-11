@@ -227,4 +227,82 @@ public class ApiOrthanc {
         factory.getHttpClient().getConnectionManager().getSchemeRegistry().register(scheme);
         return new RestTemplate(factory);
     }
+    
+    public String[] AmbilWaktuStudy(String studyId){
+        try{
+            headers = new HttpHeaders();
+            headers.add("Authorization", "Basic " + authEncrypt);
+
+            requestEntity = new HttpEntity(headers);
+
+            String url = koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/studies/"+studyId;
+
+            String hasil = getRest().exchange(url, HttpMethod.GET, requestEntity, String.class).getBody();
+
+            JsonNode json = mapper.readTree(hasil);
+
+            String date = json.path("MainDicomTags").path("StudyDate").asText();
+            String time = json.path("MainDicomTags").path("StudyTime").asText();
+
+            return new String[]{date, time};
+
+        }catch(Exception e){
+            System.out.println("Notifikasi : " + e);
+            return new String[]{"",""};
+        }
+    }
+    
+    public String formatWaktuDICOM(String date, String time){
+        if(date.length() == 8 && time.length() >= 6){
+            return date.substring(0,4)+"-"+date.substring(4,6)+"-"+date.substring(6,8)
+                +" "+time.substring(0,2)+":"+time.substring(2,4)+":"+time.substring(4,6);
+        }
+        return "";
+    }
+    
+    public boolean UbahAccession(String studyId, String accessionBaru){
+        System.out.println("Modify AccessionNumber Study : " + studyId);
+        try{
+            headers = new HttpHeaders();
+            headers.add("Authorization", "Basic " + authEncrypt);
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+            requestJson = "{"+
+                        "\"Replace\": {"+
+                            "\"AccessionNumber\": \""+accessionBaru+"\""+
+                        "},"+
+                        "\"Keep\": ["+
+                            "\"StudyInstanceUID\","+
+                            "\"SeriesInstanceUID\","+
+                            "\"SOPInstanceUID\""+
+                        "],"+
+                        "\"Force\": true"+
+                      "}";
+            System.out.println("Request JSON : " + requestJson);
+
+            requestEntity = new HttpEntity(requestJson, headers);
+
+            String url = koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/studies/"+studyId+"/modify";
+
+            System.out.println("URL : " + url);
+
+            ResponseEntity<String> response = getRest().exchange(
+                    url,
+                    HttpMethod.POST,
+                    requestEntity,
+                    String.class
+            );
+
+            System.out.println("Response : " + response.getBody());
+
+            return true;
+
+        }catch(Exception e){
+            System.out.println("Notifikasi : " + e);
+            JOptionPane.showMessageDialog(null,"Gagal modify AccessionNumber di Orthanc..!!");
+            return false;
+        }
+    }
+    
+    
 }
