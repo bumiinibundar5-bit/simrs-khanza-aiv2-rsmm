@@ -19435,7 +19435,7 @@ private void cmbStatusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         MnPenilaianLain.add(MnPenilaianKecemasanAnak);
         MnPenilaianLain.add(MnPenilaianPasienPenyakitMenular);
         MnPenilaianLain.add(MnPenilaianPasienImunitasRendah);
-        MnPenilaianLain.add(MnPenilaianDerajatDehidrasi);
+     //   MnPenilaianLain.add(MnPenilaianDerajatDehidrasi); //Nonaktifkan Menu Tampil Derajat Dehidrasi 
         MnPenilaianLain.add(MnPenilaianPsikolog);
         MnPenilaianLain.add(MnPenilaianPsikologKlinis);
         MnPenilaianLain.add(MnHemodialisa);

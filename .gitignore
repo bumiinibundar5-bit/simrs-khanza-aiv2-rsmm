@@ -55,3 +55,4 @@ my.cnf
 # IDE / Editor
 .vscode
 .idea
+/nbproject/private/
