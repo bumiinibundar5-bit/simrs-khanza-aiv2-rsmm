@@ -136,6 +136,7 @@ import rekammedis.RMPenilaianAwalMedisRanapKandungan;
 import rekammedis.RMPenilaianAwalMedisRanapNeonatus;
 import rekammedis.RMPenilaianBayiBaruLahir;
 import rekammedis.RMPenilaianDerajatDehidrasi;
+import rekammedis.RMPenilaianDerajatDehidrasi2;
 import rekammedis.RMPenilaianFisioterapi;
 import rekammedis.RMPenilaianKorbanKekerasan;
 import rekammedis.RMPenilaianLanjutanRisikoJatuhAnak;
@@ -17625,6 +17626,82 @@ private void cmbStatusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         }
     }
 
+    //Dehidrasi2
+            private void MnPenilaianDerajatDehidrasi2ActionPerformed(java.awt.event.ActionEvent evt) {
+            if(tabMode.getRowCount()==0){
+                JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+                TCari.requestFocus();
+            }else{
+                if(tbKamIn.getSelectedRow()>-1){
+                    if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                        try {
+                            psanak=koneksi.prepareStatement(
+                                "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
+                            try {
+                                psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                                rs2=psanak.executeQuery();
+                                if(rs2.next()){
+                                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+                                    RMPenilaianDerajatDehidrasi2 form=new RMPenilaianDerajatDehidrasi2(null,false);
+                                    form.isCek();
+                                    form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                                    form.setLocationRelativeTo(internalFrame1);
+                                    form.emptTeks();
+
+                                    if(R1.isSelected()==true){
+                                        form.setNoRm(rs2.getString("no_rawat2"),new Date());
+                                    }else if(R2.isSelected()==true){
+                                        form.setNoRm(rs2.getString("no_rawat2"),DTPCari2.getDate());
+                                    }else if(R3.isSelected()==true){
+                                        form.setNoRm(rs2.getString("no_rawat2"),DTPCari4.getDate());
+                                    }
+
+                                    form.tampil();
+                                    form.setVisible(true);
+                                    this.setCursor(Cursor.getDefaultCursor());
+                                }else{
+                                    JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+                                    tbKamIn.requestFocus();
+                                }
+                            } catch(Exception ex){
+                                System.out.println("Notifikasi : "+ex);
+                            }finally{
+                                if(rs2 != null){
+                                    rs2.close();
+                                }
+                                if(psanak != null){
+                                    psanak.close();
+                                }
+                            }
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
+                    }else{
+                        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+                        RMPenilaianDerajatDehidrasi2 form=new RMPenilaianDerajatDehidrasi2(null,false);
+                        form.isCek();
+                        form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                        form.setLocationRelativeTo(internalFrame1);
+                        form.emptTeks();
+
+                        if(R1.isSelected()==true){
+                            form.setNoRm(norawat.getText(),new Date());
+                        }else if(R2.isSelected()==true){
+                            form.setNoRm(norawat.getText(),DTPCari2.getDate());
+                        }else if(R3.isSelected()==true){
+                            form.setNoRm(norawat.getText(),DTPCari4.getDate());
+                        }
+
+                        form.tampil();
+                        form.setVisible(true);
+                        this.setCursor(Cursor.getDefaultCursor());
+                    }
+                }
+            }
+        }
+
     private void MnHasilPemeriksaanECHOActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
@@ -18231,7 +18308,7 @@ private void cmbStatusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private javax.swing.JMenuItem MnSkorBromagePascaAnestesi,MnPenilaianPreInduksi,MnHasilPemeriksaanUSGUrologi,MnHasilPemeriksaanUSGGynecologi,MnHasilPemeriksaanEKG,MnBelumTerbitSEP,MnSudahTerbitSEP,MnHasilPemeriksaanUSGNeonatus,MnHasilEndoskopiFaringLaring,
                                   MnHasilEndoskopiHidung,MnHasilEndoskopiTelinga,MnPenilaianAwalKeperawatanRanapNeonatus,MnPenilaianPasienImunitasRendah,MnCatatanKeseimbanganCairan,MnCatatanObservasiCHBP,MnCatatanObservasiInduksiPersalinan,
                                   MnDataOperasi,MnPenilaianAwalKeperawatanRanapBayiAnak,MnCatatanObservasiRestrainNonFarmakologi,MnCatatanObservasiVentilator,MnCatatanAnastesiSedasi,MnChecklistPemberianFibrinolitik,MnPenilaianPsikologKlinis,MnPenilaianAwalMedisNeonatus,
-                                  MnPenilaianDerajatDehidrasi,MnHasilPemeriksaanECHO,MnPenilaianBayiBaruLahir,MnLaporanTindakan;
+                                  MnPenilaianDerajatDehidrasi,MnHasilPemeriksaanECHO,MnPenilaianBayiBaruLahir,MnLaporanTindakan,MnPenilaianDerajatDehidrasi2;
     private javax.swing.JMenu MnHasilUSG,MnHasilEndoskopi,MnCatatanObservasi;
 
     private void tampil() {
@@ -18817,6 +18894,7 @@ private void cmbStatusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         MnPenilaianPsikolog.setEnabled(akses.getpenilaian_psikologi());
         MnPenilaianPsikologKlinis.setEnabled(akses.getpenilaian_psikologi_klinis());
         MnPenilaianDerajatDehidrasi.setEnabled(akses.getpenilaian_derajat_dehidrasi());
+        MnPenilaianDerajatDehidrasi2.setEnabled(akses.getpenilaian_derajat_dehidrasi2());
         MnPenilaianPreOp.setEnabled(akses.getpenilaian_pre_operasi());
         MnPenilaianPreAnestesi.setEnabled(akses.getpenilaian_pre_anestesi());
         MnPersetujuanPenolakanTindakan.setEnabled(akses.getpersetujuan_penolakan_tindakan());
@@ -19287,6 +19365,19 @@ private void cmbStatusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         MnPenilaianDerajatDehidrasi.setPreferredSize(new java.awt.Dimension(260, 26));
         MnPenilaianDerajatDehidrasi.addActionListener(this::MnPenilaianDerajatDehidrasiActionPerformed);
 
+        MnPenilaianDerajatDehidrasi2 = new javax.swing.JMenuItem();
+        MnPenilaianDerajatDehidrasi2.setBackground(new java.awt.Color(255, 255, 254));
+        MnPenilaianDerajatDehidrasi2.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnPenilaianDerajatDehidrasi2.setForeground(new java.awt.Color(50, 50, 50));
+        MnPenilaianDerajatDehidrasi2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        MnPenilaianDerajatDehidrasi2.setText("Penilaian Derajat Dehidrasi 2");
+        MnPenilaianDerajatDehidrasi2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnPenilaianDerajatDehidrasi2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnPenilaianDerajatDehidrasi2.setName("MnPenilaianDerajatDehidrasi2");
+        MnPenilaianDerajatDehidrasi2.setPreferredSize(new java.awt.Dimension(260, 26));
+        MnPenilaianDerajatDehidrasi2.addActionListener(this::MnPenilaianDerajatDehidrasi2ActionPerformed);
+
+
         MnPenilaianAwalMedisNeonatus = new javax.swing.JMenuItem();
         MnPenilaianAwalMedisNeonatus.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianAwalMedisNeonatus.setFont(new java.awt.Font("Tahoma", 0, 11));
@@ -19435,13 +19526,14 @@ private void cmbStatusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         MnPenilaianLain.add(MnPenilaianKecemasanAnak);
         MnPenilaianLain.add(MnPenilaianPasienPenyakitMenular);
         MnPenilaianLain.add(MnPenilaianPasienImunitasRendah);
-     //   MnPenilaianLain.add(MnPenilaianDerajatDehidrasi); //Nonaktifkan Menu Tampil Derajat Dehidrasi 
+//      MnPenilaianLain.add(MnPenilaianDerajatDehidrasi);
+        MnPenilaianLain.add(MnPenilaianDerajatDehidrasi2);
+
         MnPenilaianLain.add(MnPenilaianPsikolog);
         MnPenilaianLain.add(MnPenilaianPsikologKlinis);
         MnPenilaianLain.add(MnHemodialisa);
         MnPenilaianLain.add(MnPengkajianRestrain);
-
-//        MnPermintaan.add(MnPermintaanKonsultasiMedik);
+//      MnPermintaan.add(MnPermintaanKonsultasiMedik);
         MnTindakan.add(MnDataOperasi);
     }
 }

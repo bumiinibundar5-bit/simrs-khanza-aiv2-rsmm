@@ -10731,7 +10731,7 @@ private void BtnSuratPernyataanKronologisActionPerformed(java.awt.event.ActionEv
         // ===== Custom by ChatGPT PenilaianDerajatDehidrasi2 START =====
         BtnPenilaianDerajatDehidrasi2 = new widget.Button();
         BtnPenilaianDerajatDehidrasi2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
-        BtnPenilaianDerajatDehidrasi2.setText("Penilaian Derajat Dehidrasi 2");
+        BtnPenilaianDerajatDehidrasi2.setText("Penilaian Derajat Dehidrasi");
         BtnPenilaianDerajatDehidrasi2.setFocusPainted(false);
         BtnPenilaianDerajatDehidrasi2.setFont(new java.awt.Font("Tahoma", 0, 11));
         BtnPenilaianDerajatDehidrasi2.setGlassColor(new java.awt.Color(255, 255, 255));
